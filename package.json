@@ -1,0 +1,37 @@
+{
+  "name": "@onephrase/jsen",
+  "title": "JSEN",
+  "description": "JS.E(N) (JavaScript Expression Notation) Domain-Specific Language (DSL) parser+evaluator.",
+  "keywords": [
+    "DSL-driven development",
+    "Parser Combinator",
+    "DSL Parser",
+    "lexer"
+  ],
+  "homepage": "https://www.onephrase.dev",
+  "icon": "https://www.onephrase.dev/icon.svg",
+  "author": "Oxford Harrison <oxharriscreative@gmail.com>",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onephrase/jsen.git"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"build": "webpack --config ../webpack.config.js",
+	"watch": "webpack --watch"
+  },
+  "dependencies": {
+    "@onephrase/commons": "^0.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
+  },
+  "bugs": {
+    "url": "https://github.com/onephrase/jsen/issues"
+  }
+}
