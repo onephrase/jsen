@@ -110,33 +110,42 @@ const Func = class extends FuncInterface {
 	 * @inheritdoc
 	 */
 	static parse(expr, parseCallback, Static = Func) {
-		var splits = Lexer.split(expr, _flatten(Static.operators));
-		if (splits.length === 2) {
+		expr = expr.trim();
+		var splits;
+		if (expr.startsWith('function') 
+		&& (splits = Lexer.split(expr, []).slice(1).filter(b => b.trim())) && splits.length === 2) {
+			var arrowFunctionFormatting = false;
+			var funcHead = _unwrap(splits.shift().trim(), '(', ')');
+			var funcBody = _unwrap(splits.shift().trim(), '{', '}');
+		} else if (!expr.startsWith('function') 
+		&& (splits = Lexer.split(expr, ['=>'])) && splits.length === 2) {
 			var funcHead = splits.shift().trim();
 			var funcBody = splits.shift().trim();
-			var wrappings = {};
+			var arrowFunctionFormatting = {};
 			if (_wrapped(funcHead, '(', ')')) {
 				funcHead = _unwrap(funcHead, '(', ')');
 			} else {
-				wrappings.head = false;
+				arrowFunctionFormatting.head = false;
 			}
 			if (_wrapped(funcBody, '{', '}')) {
 				funcBody = _unwrap(funcBody, '{', '}');
 			} else {
-				wrappings.body = false;
+				arrowFunctionFormatting.body = false;
 			}
-			var paramters = {};
-			Lexer.split(funcHead, [',']).forEach(param => {
-				var paramSplit = param.split('=');
-				if (paramSplit[1]) {
-					paramters[paramSplit[0].trim()] = parseCallback(paramSplit[1].trim());
-				} else {
-					paramters[param.trim()] = null;
-				}
-			});
-			var statements = parseCallback(funcBody);
-			return new Static(paramters, statements, wrappings);
+		} else {
+			return;
 		}
+		var paramters = {};
+		Lexer.split(funcHead, [',']).forEach(param => {
+			var paramSplit = param.split('=');
+			if (paramSplit[1]) {
+				paramters[paramSplit[0].trim()] = parseCallback(paramSplit[1].trim());
+			} else {
+				paramters[param.trim()] = null;
+			}
+		});
+		var statements = parseCallback(funcBody);
+		return new Static(paramters, statements, arrowFunctionFormatting);
 	}
 };
 

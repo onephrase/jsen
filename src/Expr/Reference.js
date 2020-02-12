@@ -10,6 +10,9 @@ import {
 	_isUndefined,
 	_isFunction
 } from '@onephrase/commons/src/Js.js';
+import {
+	_from as _arr_from
+} from '@onephrase/commons/src/Arr.js';
 import ReferenceInterface from './ReferenceInterface.js';
 import ExprInterface from '../ExprInterface.js';
 import Contexts from '../Contexts.js';
@@ -58,7 +61,7 @@ const Reference = class extends ReferenceInterface {
 			}
 			var _contexts = parts.context instanceof Contexts 
 				? parts.context.slice() 
-				: [parts.context];
+				: (parts.context ? [parts.context] : []);
 			while(_contexts.length) {
 				var cntxt = _contexts.pop(), val = cntxt[parts.name];
 				if (!_isUndefined(val)) {
