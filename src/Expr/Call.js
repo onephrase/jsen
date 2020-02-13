@@ -2,14 +2,12 @@
 /**
  * @imports
  */
-import {
-	_isArray,
-	_isFunction,
-	_isNumeric,
-	_isObject,
-	_isString,
-	_isUndefined
-} from '@onephrase/commons/src/Js.js';
+import _isArray from '@onephrase/commons/js/isArray.js';
+import _isFunction from '@onephrase/commons/js/isFunction.js';
+import _isUndefined from '@onephrase/commons/js/isUndefined.js';
+import _isNumeric from '@onephrase/commons/js/isNumeric.js';
+import _isObject from '@onephrase/commons/js/isObject.js';
+import _isString from '@onephrase/commons/js/isString.js';
 import ReferenceInterface from './ReferenceInterface.js';
 import CallInterface from './CallInterface.js';
 import Arguments from './Arguments.js';
@@ -44,16 +42,15 @@ const Call = class extends CallInterface {
 				return callback(this, reference.context, reference.name, args);
 			}
 			// -----------------------------
-			var _contexts = reference.context instanceof Contexts 
-				? reference.context.slice() 
-				: [reference.context];
-			var __contexts = _contexts.slice();
-			while(_contexts.length) {
-				var cntxt = _contexts.pop();
-				if (cntxt && _isFunction(cntxt[reference.name])) {
-					return cntxt[reference.name](...args);
-				}
-				// -----------------------------
+			var _contexts = Contexts.create(reference.context).slice();
+			var func = _contexts.get(reference.name, true/*bindThis*/);
+			if (_isFunction(func)) {
+				return func(...args);
+			}
+			// -----------------------------
+			var handler, _cntxts = _contexts.slice();
+			while(_cntxts.length && !handler) {
+				var cntxt = _cntxts.shift();
 				var utils = Call.utils || {};
 				var handler = _isNumeric(cntxt) && utils.Num ? utils.Num
 					: (_isString(cntxt) && utils.Str ? utils.Str
@@ -63,8 +60,8 @@ const Call = class extends CallInterface {
 					args.unshift(cntxt);
 					return handler[reference.name](...args);
 				}
+				throw new Error('"' + this + '" is not a function. (Called on ' + _contexts.map(c => typeof c).join(', ') + ')');
 			}
-			throw new Error('"' + this + '" is not a function. (Called on ' + __contexts.map(c => typeof c).join(', ') + ')');
 		}
 	}
 	 

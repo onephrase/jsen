@@ -2,9 +2,7 @@
 /**
  * @imports
  */
-import {
-	_flatten
-} from '@onephrase/commons/src/Arr.js';
+import _flatten from '@onephrase/commons/arr/flatten.js';
 import StatementsInterface from './StatementsInterface.js';
 import ReturnInterface from './ReturnInterface.js';
 import Lexer from '../Lexer.js';

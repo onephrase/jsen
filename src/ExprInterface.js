@@ -2,8 +2,8 @@
 /**
  * @imports
  */
-import {_isObject} from '@onephrase/commons/src/Js.js';
-import {_even} from '@onephrase/commons/src/Obj.js';
+import _isObject from '@onephrase/commons/js/isObject.js';
+import _even from '@onephrase/commons/obj/even.js';
 
 /**
  * ---------------------------

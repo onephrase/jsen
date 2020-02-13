@@ -11,7 +11,7 @@
   "homepage": "https://www.onephrase.dev",
   "icon": "https://www.onephrase.dev/icon.svg",
   "author": "Oxford Harrison <oxharriscreative@gmail.com>",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "type": "module",
   "repository": {
@@ -25,7 +25,10 @@
 	"watch": "webpack --watch"
   },
   "dependencies": {
-    "@onephrase/commons": "^0.0.0"
+    "@onephrase/commons": "file:../commons"
+  },
+  "-dependencies": {
+    "@onephrase/commons": "^0.0.1"
   },
   "devDependencies": {
     "webpack": "^4.41.0",

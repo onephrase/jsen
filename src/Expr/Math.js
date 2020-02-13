@@ -2,14 +2,10 @@
 /**
  * @imports
  */
-import {
-	_flatten,
-	_intersect,
-	_unique
-} from '@onephrase/commons/src/Arr.js';
-import {
-	_isNumeric
-} from '@onephrase/commons/src/Js.js';
+import _isNumeric from '@onephrase/commons/js/isNumeric.js';
+import _flatten from '@onephrase/commons/arr/flatten.js';
+import _intersect from '@onephrase/commons/arr/intersect.js';
+import _unique from '@onephrase/commons/arr/unique.js';
 import MathInterface from './MathInterface.js';
 import Lexer from '../Lexer.js';
 

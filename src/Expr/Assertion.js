@@ -2,11 +2,9 @@
 /**
  * @imports
  */
-import {
-	_first,
-	_flatten,
-	_unique
-} from '@onephrase/commons/src/Arr.js';
+import _first from '@onephrase/commons/arr/first.js';
+import _flatten from '@onephrase/commons/arr/flatten.js';
+import _unique from '@onephrase/commons/arr/unique.js';
 import AssertionInterface from './AssertionInterface.js';
 import Lexer from '../Lexer.js';
 

@@ -44,7 +44,6 @@ import Statements from './Expr/Statements.js';
 import StatementsInterface from './Expr/StatementsInterface.js';
 import Str from './Expr/Str.js';
 import StrInterface from './Expr/StrInterface.js';
-import * as Commons from '@onephrase/commons';
 
 /**
  * @var object
@@ -69,8 +68,6 @@ Jsen.grammars = {
 	Call: Call,					// field1()
 	Reference: Reference,				// field1
 };
-
-Call.utils = Commons;
 
 /**
  * @exports

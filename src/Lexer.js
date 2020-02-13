@@ -2,21 +2,15 @@
 /**
  * @imports
  */
-import {
-	_isString,
-	_isUndefined
-} from '@onephrase/commons/src/Js.js';
-import {
-	_from,
-	_flatten,
-	_first,
-	_last
-} from '@onephrase/commons/src/Arr.js';
-import {
-	_merge,
-	_even,
-	_copyPlain
-} from '@onephrase/commons/src/Obj.js';
+import _isString from '@onephrase/commons/js/isString.js';
+import _isUndefined from '@onephrase/commons/js/isUndefined.js';
+import _arrFrom from '@onephrase/commons/arr/from.js';
+import _flatten from '@onephrase/commons/arr/flatten.js';
+import _first from '@onephrase/commons/arr/first.js';
+import _last from '@onephrase/commons/arr/last.js';
+import _merge from '@onephrase/commons/obj/merge.js';
+import _even from '@onephrase/commons/obj/even.js';
+import _copyPlain from '@onephrase/commons/obj/copyPlain.js';
 
 /**
  * --------------------------
@@ -110,7 +104,7 @@ const Lexer = class {
 	 */
 	lex(delims, options) {
 		var runtime = {
-			delims: _from(delims),
+			delims: _arrFrom(delims),
 			options: _merge(true, {}, this.$options, options || {}),
 			nesting: [],
 			maxDepth: 0,

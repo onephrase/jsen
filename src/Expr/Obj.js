@@ -2,17 +2,11 @@
 /**
  * @imports
  */
-import {
-	_first,
-	_last
-} from '@onephrase/commons/src/Arr.js';
-import {
-	_each
-} from '@onephrase/commons/src/Obj.js';
-import {
-	_wrapped,
-	_unwrap
-} from '@onephrase/commons/src/Str.js';
+import _wrapped from '@onephrase/commons/str/wrapped.js';
+import _unwrap from '@onephrase/commons/str/unwrap.js';
+import _first from '@onephrase/commons/arr/first.js';
+import _last from '@onephrase/commons/arr/last.js';
+import _each from '@onephrase/commons/obj/each.js';
 import ObjInterface from './ObjInterface.js';
 import Lexer from '../Lexer.js';
 

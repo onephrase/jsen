@@ -2,10 +2,8 @@
 /**
  * @imports
  */
-import {
-	_after,
-	_before
-} from '@onephrase/commons/src/Str.js';
+import _after from '@onephrase/commons/str/after.js';
+import _before from '@onephrase/commons/str/before.js';
 import CommentsInterface from './CommentsInterface.js';
 import Lexer from '../Lexer.js';
 

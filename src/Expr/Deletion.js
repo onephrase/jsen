@@ -2,13 +2,9 @@
 /**
  * @imports
  */
-import {
-	_last
-} from '@onephrase/commons/src/Arr.js';
-import {
-	_isUndefined,
-	_isFunction
-} from '@onephrase/commons/src/Js.js';
+import _last from '@onephrase/commons/arr/last.js';
+import _isFunction from '@onephrase/commons/js/isFunction.js';
+import _isUndefined from '@onephrase/commons/js/isUndefined.js';
 import ReferenceInterface from './ReferenceInterface.js';
 import DeletionInterface from './DeletionInterface.js';
 import Contexts from '../Contexts.js';

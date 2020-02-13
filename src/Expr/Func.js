@@ -2,17 +2,11 @@
 /**
  * @imports
  */
-import {
-	_copy,
-	_each
-} from '@onephrase/commons/src/Obj.js';
-import {
-	_flatten
-} from '@onephrase/commons/src/Arr.js';
-import {
-	_wrapped,
-	_unwrap
-} from '@onephrase/commons/src/Str.js';
+import _copy from '@onephrase/commons/obj/copy.js';
+import _each from '@onephrase/commons/obj/each.js';
+import _flatten from '@onephrase/commons/arr/flatten.js';
+import _wrapped from '@onephrase/commons/str/wrapped.js';
+import _unwrap from '@onephrase/commons/str/unwrap.js';
 import FuncInterface from './FuncInterface.js';
 import Contexts from '../Contexts.js';
 import Lexer from '../Lexer.js';
@@ -28,11 +22,11 @@ const Func = class extends FuncInterface {
 	/**
 	 * @inheritdoc
 	 */
-	constructor(paramters, statements, wrappings = {}) {
+	constructor(paramters, statements, arrowFunctionFormatting = {}) {
 		super();
 		this.paramters = paramters || {};
 		this.statements = statements;
-		this.wrappings = wrappings;
+		this.arrowFunctionFormatting = arrowFunctionFormatting;
 	}
 	
 	/**
@@ -81,13 +75,8 @@ const Func = class extends FuncInterface {
 						? this.paramters[name].eval(context, callback) 
 						: null);
 			});
-			var multipleContexts = new Contexts(localContext);
-			// But this newer context should come last
-			if (context instanceof Contexts) {
-				multipleContexts = context.concat(multipleContexts);
-			} else if (context) {
-				multipleContexts.unshift(context);
-			}
+			// But this newer context should come first
+			var multipleContexts = Contexts.create(localContext).concat(Contexts.create(context));
 			return this.statements.eval(multipleContexts, callback);
 		};
 	}
@@ -100,10 +89,13 @@ const Func = class extends FuncInterface {
 		_each(this.paramters, (name, value) => {
 			paramters.push(name + (value ? '=' + value.toString(context) : ''));
 		});
-		var headNoWrap = this.wrappings.head === false || (paramters.length === 1 && paramters[0].indexOf('=') === -1);
-		var bodyNoWrap = this.wrappings.body === false
-		return (headNoWrap ? paramters[0] : '(' + paramters.join(', ') + ')')
-		+ ' => ' + (bodyNoWrap ? this.statements.toString(context) : '{' + this.statements.toString(context) + '}');
+		if (this.arrowFunctionFormatting) {
+			var headNoWrap = this.arrowFunctionFormatting.head === false || (paramters.length === 1 && paramters[0].indexOf('=') === -1);
+			var bodyNoWrap = this.arrowFunctionFormatting.body === false
+			return (headNoWrap ? paramters[0] : '(' + paramters.join(', ') + ')')
+			+ ' => ' + (bodyNoWrap ? this.statements.toString(context) : '{' + this.statements.toString(context) + '}');
+		}
+		return 'function (' + paramters.join(', ') + ') {' + this.statements.toString(context) + '}';
 	}
 	
 	/**

@@ -2,23 +2,14 @@
 /**
  * @imports
  */
-import {
-	_matches
-} from '@onephrase/commons/src/Str.js';
-import {
-	_flatten,
-	_first,
-	_last,
-	_difference
-} from '@onephrase/commons/src/Arr.js';
-import {
-	_isArray,
-	_isObject,
-	_isString
-} from '@onephrase/commons/src/Js.js';
-import {
-	_each
-} from '@onephrase/commons/src/Obj.js';
+import _flatten from '@onephrase/commons/arr/flatten.js';
+import _first from '@onephrase/commons/arr/first.js';
+import _last from '@onephrase/commons/arr/last.js';
+import _difference from '@onephrase/commons/arr/difference.js';
+import _isArray from '@onephrase/commons/js/isArray.js';
+import _isObject from '@onephrase/commons/js/isObject.js';
+import _isString from '@onephrase/commons/js/isString.js';
+import _each from '@onephrase/commons/obj/each.js';
 import ComparisonInterface from './ComparisonInterface.js';
 import Lexer from '../Lexer.js';
 
@@ -155,7 +146,7 @@ const Comparison = class extends ComparisonInterface {
 				 return operand1 >= operand2[0] && operand1 <= operand2[1];
 	
 			case '/**/': // Regex
-				return _matches(operand2, operand1);
+				return operand2.match(new RegExp(operand1));
 			default:
 				return false;
 		}

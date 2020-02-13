@@ -2,13 +2,9 @@
 /**
  * @imports
  */
-import {
-	_remove
-} from '@onephrase/commons/src/Arr.js';
-import {
-	_isArray,
-	_instanceof
-} from '@onephrase/commons/src/Js.js';
+import _remove from '@onephrase/commons/arr/remove.js';
+import _isArray from '@onephrase/commons/js/isArray.js';
+import _instanceof from '@onephrase/commons/js/instanceof.js';
 import AssignmentInterface from './Expr/AssignmentInterface.js';
 import ReferenceInterface from './Expr/ReferenceInterface.js';
 import DeletionInterface from './Expr/DeletionInterface.js';

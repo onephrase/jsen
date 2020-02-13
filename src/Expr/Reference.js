@@ -2,17 +2,10 @@
 /**
  * @imports
  */
-import {
-	_wrapped,
-	_unwrap
-} from '@onephrase/commons/src/Str.js';
-import {
-	_isUndefined,
-	_isFunction
-} from '@onephrase/commons/src/Js.js';
-import {
-	_from as _arr_from
-} from '@onephrase/commons/src/Arr.js';
+import _isUndefined from '@onephrase/commons/js/isUndefined.js';
+import _isFunction from '@onephrase/commons/js/isFunction.js';
+import _wrapped from '@onephrase/commons/str/wrapped.js';
+import _unwrap from '@onephrase/commons/str/unwrap.js';
 import ReferenceInterface from './ReferenceInterface.js';
 import ExprInterface from '../ExprInterface.js';
 import Contexts from '../Contexts.js';
@@ -59,15 +52,7 @@ const Reference = class extends ReferenceInterface {
 			if (_isFunction(callback)) {
 				return callback(this, parts.context, parts.name);
 			}
-			var _contexts = parts.context instanceof Contexts 
-				? parts.context.slice() 
-				: (parts.context ? [parts.context] : []);
-			while(_contexts.length) {
-				var cntxt = _contexts.pop(), val = cntxt[parts.name];
-				if (!_isUndefined(val)) {
-					return val;
-				}
-			}
+			return Contexts.create(parts.context).get(parts.name);
 		}
 	}
 	 
