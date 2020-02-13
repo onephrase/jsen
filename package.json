@@ -25,9 +25,6 @@
 	"watch": "webpack --watch"
   },
   "dependencies": {
-    "@onephrase/commons": "file:../commons"
-  },
-  "-dependencies": {
     "@onephrase/commons": "^0.0.1"
   },
   "devDependencies": {
